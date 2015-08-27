@@ -1,0 +1,16 @@
+{
+  "name": "weather-service",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "~1.0.2",
+    "express": "~4.0.0",
+    "request": "~2.40.0",
+    "underscore": "1.8.2",
+    "cors" : "2.5.3"
+  },
+  "license": "mit",
+  "main": "application.js",
+  "scripts": {
+    "start": "node weather.js"
+  }
+}
