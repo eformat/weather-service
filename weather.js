@@ -36,7 +36,7 @@ app.get('/weather', function(req, res){
   });
 });
 
-var server = app.listen(8009);
+var server = app.listen(8080);
 
 // test
 // curl 'http://localhost:3001/weather?name=Mike&city=Wellington&country=nz'
