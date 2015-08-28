@@ -21,24 +21,22 @@ app.get('/weather', function(req, res){
       return a + b;
     }, 0);
     // get current weather forecast
-    weatherbody.weather = _.reduce(weatherbody.list, function(a, b){
-      return b.weather;
-    }, 0);
-    if (!weatherbody.weather[0].description) {
+    weatherbody.weather = weatherbody.list[0].weather[0];
+    if (!weatherbody.weather.description) {
       return res.set(500).json();
     }
     return res.json({
       'name': name,
       'rainfall': weatherbody.rainfall,
-      'forecast': weatherbody.weather[0].description,
-      'icon': weatherbody.weather[0].icon,
+      'forecast': weatherbody.weather.description,
+      'icon': weatherbody.weather.icon,
       'city': weatherbody.city.name,
       'country': weatherbody.city.country
     });
   });
 });
 
-var server = app.listen(8080);
+var server = app.listen(8009);
 
 // test
 // curl 'http://localhost:3001/weather?name=Mike&city=Wellington&country=nz'
