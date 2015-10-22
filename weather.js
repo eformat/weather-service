@@ -16,17 +16,18 @@ app.get('/weather', function(req, res){
   country = req.query.country,
   name = req.query.name;
   
-  request.get({url : weatherUrl + '?q=' + city + ',' + country + '?APPID=' + appId, json : true}, function(err, response, weatherbody){
+  request.get({url : weatherUrl + '?q=' + city + ',' + country + '&appid=' + appId, json : true}, function(err, response, weatherbody){
     // sum all the inches rainfall in the forecast
     weatherbody.rainfall = _.reduce(weatherbody.list, function(a, b){ 
       var b = b.rain && b.rain['3h'] || 0;
       return a + b;
     }, 0);
-    // get current weather forecast
-    weatherbody.weather = weatherbody.list[0].weather[0];
-    if (!weatherbody.weather.description) {
+    // error
+    if (weatherbody.cod == "404") {
       return res.set(500).json();
     }
+    // get current weather forecast
+    weatherbody.weather = weatherbody.list[0].weather[0];
     return res.json({
       'name': name,
       'rainfall': weatherbody.rainfall,
