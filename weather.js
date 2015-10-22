@@ -6,6 +6,8 @@ var app = require('express')();
 var request = require('request');
 var _ = require('underscore');
 var weatherUrl = 'http://api.openweathermap.org/data/2.5/forecast';
+// environment variable for api key
+var appId = process.env.APP_ID;
 
 app.use(require('cors')());
 
@@ -14,7 +16,7 @@ app.get('/weather', function(req, res){
   country = req.query.country,
   name = req.query.name;
   
-  request.get({url : weatherUrl + '?q=' + city + ',' + country, json : true}, function(err, response, weatherbody){
+  request.get({url : weatherUrl + '?q=' + city + ',' + country + '?APPID=' + appId, json : true}, function(err, response, weatherbody){
     // sum all the inches rainfall in the forecast
     weatherbody.rainfall = _.reduce(weatherbody.list, function(a, b){ 
       var b = b.rain && b.rain['3h'] || 0;
