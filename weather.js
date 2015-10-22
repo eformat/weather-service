@@ -22,7 +22,7 @@ app.get('/weather', function(req, res){
       var b = b.rain && b.rain['3h'] || 0;
       return a + b;
     }, 0);
-    // error
+    // error return
     if (weatherbody.cod == "404") {
       return res.set(500).json();
     }
